@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../app.service';
 import {
   GoogleMaps,
   GoogleMap,
@@ -16,8 +17,24 @@ import { Platform } from '@ionic/angular';
 })
 export class MarkerPage implements OnInit {
   map: GoogleMap;
+  clientes:any;
 
-  constructor(private platform: Platform) { }
+  constructor(private platform: Platform,private appservice: AppService) { 
+
+
+
+
+    this.appservice.traecliente('1101').subscribe((result) => {
+
+    this.clientes = result;
+
+
+  });
+
+
+
+
+  }
 
   async ngOnInit() {
     // Since ngOnInit() is executed before `deviceready` event,
