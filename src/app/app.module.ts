@@ -9,10 +9,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppService } from './app.service';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent,UsuarioComponent],
+  entryComponents: [UsuarioComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

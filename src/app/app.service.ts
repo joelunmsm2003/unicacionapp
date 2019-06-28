@@ -12,8 +12,8 @@ export class AppService {
  
 
 
-
-  url = 'http://comunica7.com/';
+  url = 'http://inncomun.com:5000/';
+  url1 = 'http://comunica7.com/';
   apiKey = ''; // <-- Enter your own key here!
  
 
@@ -23,13 +23,19 @@ export class AppService {
 
 
 
-   traecliente(tipo: string): Observable<any> {
-    return this.http.get(this.url+'apirestcap/public/propuesta/filtrocliente/'+tipo+'/null').pipe(
+   traeusuarios(): Observable<any> {
+    return this.http.get(this.url+'usuarios/').pipe(
       map(results => results)
     );
 
    }
 
+     traecliente(tipo: string): Observable<any> {
+    return this.http.get(this.url1+'apirestcap/public/propuesta/filtrocliente/'+tipo+'/null').pipe(
+      map(results => results)
+    );
+  }
 
-   
+
+
   }

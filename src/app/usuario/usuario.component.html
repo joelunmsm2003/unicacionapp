@@ -1,0 +1,46 @@
+<ion-content padding>
+<ion-icon ios="ios-close" md="md-close" (click)='myDismiss()' style='float:right;	font-size: 40px; 
+	'></ion-icon>
+	
+
+
+<img src="{{foto}}" style='max-width: 200px;border-radius: 50%;'>
+
+<h1>{{name}} </h1>
+
+
+<p>{{descripcion}}</p>
+
+
+
+    <ion-item>
+      <ion-label position="floating">Mensaje</ion-label>
+      <ion-input type="text"  required></ion-input>
+    </ion-item>
+  
+
+
+    	 <ion-item>
+      <ion-label position="floating">Numero Cuenta</ion-label>
+      <ion-input type="number"  required></ion-input>
+    </ion-item>
+    <ion-item>
+
+ 
+      <ion-input type="file"  required></ion-input>
+    </ion-item>
+
+
+   
+
+
+
+</ion-content>
+
+<ion-footer>
+<ion-toolbar color='danger' (click)='onSubmit("3")' padding>
+	Enviar
+
+</ion-toolbar>
+
+</ion-footer>

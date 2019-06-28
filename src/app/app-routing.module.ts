@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'marker-cluster',
     pathMatch: 'full'
   },
   {
@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'kml-overlay', loadChildren: './kml-overlay/kml-overlay.module#KmlOverlayPageModule' },
   { path: 'street-view', loadChildren: './street-view/street-view.module#StreetViewPageModule' },
   { path: 'base-array-class', loadChildren: './base-array-class/base-array-class.module#BaseArrayClassPageModule' }
+
 ];
 
 @NgModule({

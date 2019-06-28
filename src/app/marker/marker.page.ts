@@ -17,20 +17,18 @@ import { Platform } from '@ionic/angular';
 })
 export class MarkerPage implements OnInit {
   map: GoogleMap;
-  clientes:any;
+  usuarios:any;
+  marker:any = []
 
   constructor(private platform: Platform,private appservice: AppService) { 
 
 
 
 
-    this.appservice.traecliente('1101').subscribe((result) => {
-
-    this.clientes = result;
 
 
-  });
 
+ 
 
 
 
@@ -43,8 +41,20 @@ export class MarkerPage implements OnInit {
     await this.loadMap();
   }
 
+
+
+  agregaposition(lat,lng,icon){
+
+    this.marker.push({'position':{'lat':lat,'lng':lng},'iconData':icon})
+
+  }
+
+
   loadMap() {
-    let POINTS: BaseArrayClass<any> = new BaseArrayClass<any>([
+
+
+
+    let data =[
       {
         position: {lat:41.79883, lng:140.75675},
         iconData: "./assets/imgs/Number-1-icon.png"
@@ -91,7 +101,15 @@ export class MarkerPage implements OnInit {
         iconData: "/path/to/image/file"  // Absolute path is also acceptable.
       }
       */
-    ]);
+    ]
+
+
+    this.appservice.traeusuarios().subscribe((result) => {
+
+    this.usuarios = result;
+
+
+        let POINTS: BaseArrayClass<any> = new BaseArrayClass<any>(this.usuarios);
 
     let bounds: ILatLng[] = POINTS.map((data: any, idx: number) => {
       console.log(data);
@@ -109,6 +127,15 @@ export class MarkerPage implements OnInit {
       marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(this.onMarkerClick);
       marker.on(GoogleMapsEvent.INFO_CLICK).subscribe(this.onMarkerClick);
     });
+
+   
+
+
+
+  });
+
+
+
 
   }
 

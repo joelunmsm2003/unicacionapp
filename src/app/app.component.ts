@@ -11,7 +11,7 @@ import { Environment } from '@ionic-native/google-maps/ngx';
 })
 export class AppComponent {
   public appPages = [
-    {
+    /*{
       title: 'Home',
       url: '/home',
       icon: 'home'
@@ -23,12 +23,12 @@ export class AppComponent {
     {
       title: 'HtmlInfoWindow',
       url: '/html-info-window'
-    },
+    },*/
     {
-      title: 'MarkerCluster',
+      title: 'Profesionales',
       url: '/marker-cluster'
     },
-    {
+    /*{
       title: 'Polyline',
       url: '/polyline'
     },
@@ -63,7 +63,7 @@ export class AppComponent {
     {
       title: 'BaseArrayClass',
       url: '/base-array-class'
-    }
+    }*/
   ];
 
   constructor(

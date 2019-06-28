@@ -4,10 +4,22 @@ import {
   GoogleMap,
   GoogleMapsEvent,
   MarkerCluster,
-  Marker
+  ILatLng,
+  BaseArrayClass,
+  Marker,
+  GoogleMapsAnimation,
+  MyLocation
 } from "@ionic-native/google-maps";
-import { Platform } from '@ionic/angular';
+import {
+  ToastController,
+  Platform,
+  ModalController,
+  LoadingController,
+  AlertController
+} from '@ionic/angular';
 
+import { AppService } from '../app.service';
+import { UsuarioComponent } from '../usuario/usuario.component';
 
 @Component({
   selector: 'app-marker-cluster',
@@ -17,8 +29,10 @@ import { Platform } from '@ionic/angular';
 export class MarkerClusterPage implements OnInit {
   map: GoogleMap;
 
+  muestraboton:any=false
 
-  constructor(private platform: Platform) { }
+
+  constructor(private platform: Platform,private appservice: AppService, public toastCtrl: ToastController,public modalController: ModalController,public alertController: AlertController) { }
 
   async ngOnInit() {
     // Since ngOnInit() is executed before `deviceready` event,
@@ -29,17 +43,100 @@ export class MarkerClusterPage implements OnInit {
 
   loadMap() {
 
-    this.map = GoogleMaps.create('map_canvas', {
-      'camera': {
-        'target': {
-          "lat": 21.382314,
-          "lng": -157.933097
-        },
-        'zoom': 10
+/*
+
+     this.map.getMyLocation().then((location: MyLocation) => {
+     
+      console.log(JSON.stringify(location, null ,2));
+
+      // Move the map camera to the location with animation
+      this.map.animateCamera({
+        target: location.latLng,
+        zoom: 17,
+        tilt: 30
+      });
+
+      // add a marker
+      let marker: Marker = this.map.addMarkerSync({
+        title: 'Yo',
+        snippet: 'Hola',
+        position: location.latLng,
+        animation: GoogleMapsAnimation.BOUNCE
+      });
+
+      // show the infoWindow
+      marker.showInfoWindow();
+
+      // If clicked it, display the alert
+      marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+        this.showToast('Aqui Estoy :)');
+      });
+    })
+
+*/
+
+    this.appservice.traeusuarios().subscribe((result) => {
+
+
+        
+
+        let POINTS: BaseArrayClass<any> = new BaseArrayClass<any>(result);
+
+    let bounds: ILatLng[] = POINTS.map((data: any, idx: number) => {
+      console.log(data);
+      return data.position;
+    });
+
+
+        this.map = GoogleMaps.create('map_canvas', {
+      camera: {
+        target: bounds
       }
     });
 
-    this.addCluster(this.dummyData());
+
+     /*   this.map.getMyLocation().then((location: MyLocation) => {
+     
+      console.log(JSON.stringify(location, null ,2));*/
+
+      // Move the map camera to the location with animation
+      /*this.map.animateCamera({
+        target: location.latLng,
+        zoom: 17,
+        tilt: 30
+      });*/
+
+    
+
+/*
+      let miubicacion =  {
+        "position": location.latLng,
+        "name": "Aqui va mi especialidad",
+        "address": "Aqui va descripcion ",
+        "icon": "assets/imgs/placeholder.png"
+      }
+
+
+      result.push(miubicacion)
+
+      
+      
+      this.addCluster(result);
+
+
+
+    })*/
+
+
+        this.addCluster(result);
+
+
+
+
+
+    })
+
+    
   }
 
   addCluster(data) {
@@ -66,10 +163,44 @@ export class MarkerClusterPage implements OnInit {
 
     markerCluster.on(GoogleMapsEvent.MARKER_CLICK).subscribe((params) => {
       let marker: Marker = params[1];
+
+   
       marker.setTitle(marker.get("name"));
       marker.setSnippet(marker.get("address"));
       marker.showInfoWindow();
+
+      this.presentModal(marker);
+
     });
+
+
+
+
+  }
+
+
+async showToast(message: string) {
+    let toast = await this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+      position: 'bottom'
+    });
+
+    toast.present();
+  }
+
+
+
+
+
+
+  async presentModal(marker) {
+
+    const modal = await this.modalController.create({
+      component: UsuarioComponent,
+      componentProps: { value: marker}
+    });
+    return await modal.present();
 
   }
 
