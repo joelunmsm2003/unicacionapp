@@ -27,7 +27,7 @@ export class AppComponent {
     {
       title: 'Profesionales',
       url: '/marker-cluster'
-    },
+    }
     /*{
       title: 'Polyline',
       url: '/polyline'

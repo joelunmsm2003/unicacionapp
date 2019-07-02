@@ -95,9 +95,9 @@ export class MarkerClusterPage implements OnInit {
     });
 
 
-     /*   this.map.getMyLocation().then((location: MyLocation) => {
+        this.map.getMyLocation().then((location: MyLocation) => {
      
-      console.log(JSON.stringify(location, null ,2));*/
+      console.log(JSON.stringify(location, null ,2));
 
       // Move the map camera to the location with animation
       /*this.map.animateCamera({
@@ -108,7 +108,7 @@ export class MarkerClusterPage implements OnInit {
 
     
 
-/*
+
       let miubicacion =  {
         "position": location.latLng,
         "name": "Aqui va mi especialidad",
@@ -125,10 +125,10 @@ export class MarkerClusterPage implements OnInit {
 
 
 
-    })*/
+    })
 
 
-        this.addCluster(result);
+        //this.addCluster(result);
 
 
 
