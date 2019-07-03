@@ -12,6 +12,10 @@ import { AppService } from './app.service';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { Device } from '@ionic-native/device/ngx';
 import { IonicStorageModule } from '@ionic/storage';
+import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationResponse } from '@ionic-native/background-geolocation/ngx';
+
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+
 
 @NgModule({
   declarations: [AppComponent,UsuarioComponent],
@@ -27,6 +31,8 @@ import { IonicStorageModule } from '@ionic/storage';
     StatusBar,
     SplashScreen,
     AppService,
+    BackgroundGeolocation,
+    LocalNotifications,
     Device,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

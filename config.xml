@@ -85,7 +85,9 @@
     <preference name="GOOGLE_MAPS_IOS_API_KEY" value="(API KEY)" />
     <plugin name="cordova-plugin-googlemaps" spec="https://github.com/mapsplugin/cordova-plugin-googlemaps#multiple_maps" />
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
-    <engine name="android" spec="8.0.0" />
+    <plugin name="cordova-plugin-local-notification" spec="^0.9.0-beta.2" />
+    <plugin name="cordova-plugin-mauron85-background-geolocation" spec="@mauron85/cordova-plugin-background-geolocation@~3.0.3" />
     <engine name="ios" spec="5.0.1" />
     <engine name="browser" spec="6.0.0" />
+    <engine name="android" spec="7.0.0" />
 </widget>

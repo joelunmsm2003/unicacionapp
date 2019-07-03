@@ -7,12 +7,18 @@ import { Environment } from '@ionic-native/google-maps/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { Storage } from '@ionic/storage';
 import { AppService } from './app.service';
+import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationResponse } from '@ionic-native/background-geolocation/ngx';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+
+
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+
+
   public appPages = [
     /*{
       title: 'Home',
@@ -75,9 +81,22 @@ export class AppComponent {
     private statusBar: StatusBar,
     private device: Device,
     private storage: Storage,
-    private appservice: AppService
+    private appservice: AppService,
+    public backgroundGeolocation: BackgroundGeolocation,
+    private localNotifications: LocalNotifications
   ) {
     this.initializeApp();
+  }
+
+
+ showNotification(data){
+    // Schedule a single notification
+    this.localNotifications.schedule({
+      id: 1,
+      text: JSON.stringify(data),
+      sound: 'file://sound.mp3',
+      data: { secret: "key" }
+    });
   }
 
   initializeApp() {
@@ -106,6 +125,32 @@ export class AppComponent {
     })
 
 
+  const config: BackgroundGeolocationConfig = {
+     desiredAccuracy: 10,
+    stationaryRadius: 20,
+    distanceFilter: 30,
+    debug: true, //  enable this hear sounds for background-geolocation life-cycle.
+    stopOnTerminate: false, // enable this to clear background location settings when the app terminates
+  };
+
+  console.log('start');
+
+ this.backgroundGeolocation.configure(config)
+      .then((location: BackgroundGeolocationResponse) => {
+ 
+        console.log(location);
+        this.showNotification(location)
+        // IMPORTANT:  You must execute the finish method here to inform the native plugin that you're finished,
+        // and the background-task may be completed.  You must do this regardless if your HTTP request is successful or not.
+        // IF YOU DON'T, ios will CRASH YOUR APP for spending too much time in the background.
+        //this.backgroundGeolocation.finish(); // FOR IOS ONLY
+ 
+      });
+  // start recording location
+  this.backgroundGeolocation.start();
+
+
+
   
 
 
@@ -113,4 +158,20 @@ export class AppComponent {
 
     });
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
