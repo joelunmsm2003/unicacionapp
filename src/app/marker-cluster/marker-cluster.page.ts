@@ -20,6 +20,8 @@ import {
 
 import { AppService } from '../app.service';
 import { UsuarioComponent } from '../usuario/usuario.component';
+import { Storage } from '@ionic/storage';
+
 
 @Component({
   selector: 'app-marker-cluster',
@@ -30,9 +32,10 @@ export class MarkerClusterPage implements OnInit {
   map: GoogleMap;
 
   muestraboton:any=false
+  miubicacion:any;
 
 
-  constructor(private platform: Platform,private appservice: AppService, public toastCtrl: ToastController,public modalController: ModalController,public alertController: AlertController) { }
+  constructor(private storage: Storage,private platform: Platform,private appservice: AppService, public toastCtrl: ToastController,public modalController: ModalController,public alertController: AlertController) { }
 
   async ngOnInit() {
     // Since ngOnInit() is executed before `deviceready` event,
@@ -43,37 +46,10 @@ export class MarkerClusterPage implements OnInit {
 
   loadMap() {
 
-/*
 
-     this.map.getMyLocation().then((location: MyLocation) => {
-     
-      console.log(JSON.stringify(location, null ,2));
 
-      // Move the map camera to the location with animation
-      this.map.animateCamera({
-        target: location.latLng,
-        zoom: 17,
-        tilt: 30
-      });
 
-      // add a marker
-      let marker: Marker = this.map.addMarkerSync({
-        title: 'Yo',
-        snippet: 'Hola',
-        position: location.latLng,
-        animation: GoogleMapsAnimation.BOUNCE
-      });
 
-      // show the infoWindow
-      marker.showInfoWindow();
-
-      // If clicked it, display the alert
-      marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-        this.showToast('Aqui Estoy :)');
-      });
-    })
-
-*/
 
     this.appservice.traeusuarios().subscribe((result) => {
 
@@ -106,22 +82,31 @@ export class MarkerClusterPage implements OnInit {
         tilt: 30
       });*/
 
-    
+
+        this.storage.get('uuid').then((val) => {
 
 
-      let miubicacion =  {
-        "position": location.latLng,
-        "name": "Aqui va mi especialidad",
-        "address": "Aqui va descripcion ",
-        "icon": "assets/imgs/placeholder.png"
-      }
+              this.miubicacion =  {
+              "position": location.latLng,
+              "name": "Aqui va mi especialidad",
+              "address": "Aqui va descripcion ",
+              "icon": "assets/imgs/placeholder.png"
+              }
 
 
-      result.push(miubicacion)
+              this.appservice.actualiza(val,this.miubicacion)
 
-      
-      
-      this.addCluster(result);
+              
+
+              this.addCluster(result);
+
+
+        });
+
+
+
+            
+
 
 
 

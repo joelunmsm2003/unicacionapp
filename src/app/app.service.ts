@@ -13,7 +13,7 @@ export class AppService {
 
 
   url = 'http://inncomun.com:5000/';
-  url1 = 'http://comunica7.com/';
+
   apiKey = ''; // <-- Enter your own key here!
  
 
@@ -30,11 +30,29 @@ export class AppService {
 
    }
 
-     traecliente(tipo: string): Observable<any> {
-    return this.http.get(this.url1+'apirestcap/public/propuesta/filtrocliente/'+tipo+'/null').pipe(
+
+   registra(uuid){
+
+       return this.http.get(this.url+'registra/'+uuid).pipe(
       map(results => results)
     );
-  }
+
+
+
+   }
+
+
+   actualiza(uuid,data){
+
+      this.http.post(this.url+'actualiza/'+uuid, data)
+    .subscribe(
+      data => {
+
+      })
+
+
+
+   }
 
 
 

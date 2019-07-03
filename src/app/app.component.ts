@@ -4,6 +4,9 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Environment } from '@ionic-native/google-maps/ngx';
+import { Device } from '@ionic-native/device/ngx';
+import { Storage } from '@ionic/storage';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -69,7 +72,10 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private device: Device,
+    private storage: Storage,
+    private appservice: AppService
   ) {
     this.initializeApp();
   }
@@ -87,6 +93,24 @@ export class AppComponent {
       });
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+  
+
+      this.storage.set('uuid', this.device.uuid);
+
+     
+    
+
+       this.appservice.registra(this.device.uuid).subscribe((result) => {
+
+    })
+
+
+  
+
+
+
+
     });
   }
 }
