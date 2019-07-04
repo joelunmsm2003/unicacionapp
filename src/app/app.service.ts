@@ -42,6 +42,17 @@ export class AppService {
    }
 
 
+    mensajes(uuid){
+
+       return this.http.get(this.url+'mensajes/'+uuid).pipe(
+      map(results => results)
+    );
+
+
+
+   }
+
+
    actualiza(uuid,data){
 
       this.http.post(this.url+'actualiza/'+uuid, data)

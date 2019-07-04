@@ -22,7 +22,9 @@ const routes: Routes = [
   { path: 'html-info-window', loadChildren: './html-info-window/html-info-window.module#HtmlInfoWindowPageModule' },
   { path: 'kml-overlay', loadChildren: './kml-overlay/kml-overlay.module#KmlOverlayPageModule' },
   { path: 'street-view', loadChildren: './street-view/street-view.module#StreetViewPageModule' },
-  { path: 'base-array-class', loadChildren: './base-array-class/base-array-class.module#BaseArrayClassPageModule' }
+  { path: 'base-array-class', loadChildren: './base-array-class/base-array-class.module#BaseArrayClassPageModule' },
+  { path: 'miperfil', loadChildren: './miperfil/miperfil.module#MiperfilPageModule' },
+  { path: 'mimensaje', loadChildren: './mimensaje/mimensaje.module#MimensajePageModule' }
 
 ];
 
