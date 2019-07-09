@@ -15,11 +15,13 @@
 </ion-content>
 
 
-<ion-footer *ngIf='muestraboton'>
+<ion-footer >
 
 
-<ion-toolbar color='danger'>
-   Enviar a una solicitud 
+<ion-toolbar color='danger' (click)='loadMap()'>
+  Sync
   </ion-toolbar>
 
 </ion-footer>
+
+

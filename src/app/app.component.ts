@@ -7,7 +7,7 @@ import { Environment } from '@ionic-native/google-maps/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { Storage } from '@ionic/storage';
 import { AppService } from './app.service';
-import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationResponse } from '@ionic-native/background-geolocation/ngx';
+import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationResponse,BackgroundGeolocationEvents } from '@ionic-native/background-geolocation/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 
@@ -35,7 +35,18 @@ export class AppComponent {
     },*/
     {
       title: 'Profesionales',
-      url: '/marker-cluster'
+      url: '/marker-cluster',
+      icon:'home'
+    },
+    {
+      title: 'Mi Perfil',
+      url: '/miperfil',
+      icon:'ios-person'
+    },
+    {
+      title: 'Mensajes',
+      url: '/mimensaje',
+      icon:'ios-car'
     }
     /*{
       title: 'Polyline',
@@ -75,6 +86,8 @@ export class AppComponent {
     }*/
   ];
 
+  miubicacion:any;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -86,6 +99,8 @@ export class AppComponent {
     private localNotifications: LocalNotifications
   ) {
     this.initializeApp();
+
+
   }
 
 
@@ -120,9 +135,7 @@ export class AppComponent {
      
     
 
-       this.appservice.registra(this.device.uuid).subscribe((result) => {
-
-    })
+       this.appservice.registra(this.device.uuid).subscribe((result) => {})
 
 
   const config: BackgroundGeolocationConfig = {
@@ -135,42 +148,75 @@ export class AppComponent {
 
   console.log('start');
 
- this.backgroundGeolocation.configure(config)
-      .then((location: BackgroundGeolocationResponse) => {
+
+
+
+ /*this.backgroundGeolocation.configure(config)
+      .subscribe((location: BackgroundGeolocationResponse) => {
  
-        console.log(location);
-        this.showNotification(location)
-        // IMPORTANT:  You must execute the finish method here to inform the native plugin that you're finished,
-        // and the background-task may be completed.  You must do this regardless if your HTTP request is successful or not.
-        // IF YOU DON'T, ios will CRASH YOUR APP for spending too much time in the background.
-        //this.backgroundGeolocation.finish(); // FOR IOS ONLY
+        alert(location);
+    
+
+             
+
+              this.miubicacion =  {
+              "position": { "lat": location.latitude,"lng": location.longitude } ,
+              "name": "Aqui va mi especialidad",
+              "address": "Aqui va descripcion ",
+              "icon": "assets/imgs/placeholder.png"
+              }
+
+
+              this.appservice.actualiza(this.device.uuid,this.miubicacion)
+
+             
  
-      });
+      });*/
+
+
+
+
+
+    this.backgroundGeolocation.configure(config).then((location) => { 
+
+
+
+      this.backgroundGeolocation.on(BackgroundGeolocationEvents.location).subscribe((location: BackgroundGeolocationResponse) => {
+
+
+  
+            this.miubicacion =  {
+              "position": { "lat": location.latitude,"lng": location.longitude } ,
+              "name": "Aqui va mi especialidad",
+              "address": "Aqui va descripcion ",
+              "icon": "assets/imgs/placeholder.png"
+              }
+
+
+              this.appservice.actualiza(this.device.uuid,this.miubicacion)
+
+
+      })
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
   // start recording location
   this.backgroundGeolocation.start();
 
 
-
-  
-
-
-
-
     });
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

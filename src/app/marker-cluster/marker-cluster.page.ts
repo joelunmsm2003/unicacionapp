@@ -71,49 +71,9 @@ export class MarkerClusterPage implements OnInit {
     });
 
 
-        this.map.getMyLocation().then((location: MyLocation) => {
      
-      console.log(JSON.stringify(location, null ,2));
-
-      // Move the map camera to the location with animation
-      /*this.map.animateCamera({
-        target: location.latLng,
-        zoom: 17,
-        tilt: 30
-      });*/
-
-
-        this.storage.get('uuid').then((val) => {
-
-
-              this.miubicacion =  {
-              "position": location.latLng,
-              "name": "Aqui va mi especialidad",
-              "address": "Aqui va descripcion ",
-              "icon": "assets/imgs/placeholder.png"
-              }
-
-
-              this.appservice.actualiza(val,this.miubicacion)
-
-              
 
               this.addCluster(result);
-
-
-        });
-
-
-
-            
-
-
-
-
-    })
-
-
-        //this.addCluster(result);
 
 
 

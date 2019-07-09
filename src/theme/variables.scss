@@ -77,7 +77,14 @@
 
   font-family: 'Work Sans', sans-serif;
 
-  h1,p,ion-label,ion-input{
-    font-family: 'Work Sans', sans-serif;
+  h1,p,ion-label,ion-input,ion-title,div,ion-select,ion-toolbar{
+    font-family: 'Work Sans', sans-serif !important;
+  }
+
+  ion-toolbar{
+
+  font-size:20px;
+   font-family: 'Work Sans', sans-serif;
+   padding-left: 20px;
   }
 }

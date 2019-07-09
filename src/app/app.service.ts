@@ -53,9 +53,57 @@ export class AppService {
    }
 
 
+    profesiones(){
+
+       return this.http.get(this.url+'profesiones/').pipe(
+      map(results => results)
+    );
+
+
+
+   }
+
+
+   miperfil(uuid){
+
+       return this.http.get(this.url+'miperfil/'+uuid).pipe(
+      map(results => results)
+    );
+
+
+
+   }
+
+
    actualiza(uuid,data){
 
       this.http.post(this.url+'actualiza/'+uuid, data)
+    .subscribe(
+      data => {
+
+      })
+
+
+
+   }
+
+
+     actualizaperfil(uuid,data){
+
+      this.http.post(this.url+'actualizaperfil/'+uuid, data)
+    .subscribe(
+      data => {
+
+      })
+
+
+
+   }
+
+
+   guardamensaje(uuid,data){
+
+      this.http.post(this.url+'guardamensaje/'+uuid, data)
     .subscribe(
       data => {
 

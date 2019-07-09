@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { Storage } from '@ionic/storage';
+import { ModalController } from '@ionic/angular';
+import { DetallemensajeComponent } from '../detallemensaje/detallemensaje.component';
+
 
 
 @Component({
@@ -13,7 +16,7 @@ export class MimensajePage implements OnInit {
 
 	mensajes:any;
 
-  constructor(private storage: Storage,private appservice: AppService) { 
+  constructor(private storage: Storage,private appservice: AppService,private modalController: ModalController) { 
 
 
 
@@ -24,7 +27,7 @@ export class MimensajePage implements OnInit {
   	 	this.mensajes = this.appservice.mensajes(val)
 
 
-  	 }
+  	 })
 
 
   	
@@ -37,5 +40,18 @@ export class MimensajePage implements OnInit {
 
 
   }
+
+
+
+    async detallemensaje(data) {
+
+    const modal =  await  this.modalController.create({
+      component: DetallemensajeComponent,
+      componentProps: { value: data}
+    });
+    return  await  modal.present();
+    
+  }
+
 
 }
