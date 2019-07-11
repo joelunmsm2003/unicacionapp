@@ -17,8 +17,15 @@ export class MiperfilPage implements OnInit {
 
 	miperfil:any={};
 	mi:any;
+  key:any;
+  sexos:any=[{'id':1,'nombre':'Masculino'},{'id':2,'nombre':'Femenino'}]
+  any:any
+  teta:any
 
   constructor(private device: Device,private appservice: AppService) { 
+
+
+   
 
 
   	this.appservice.profesiones().subscribe(data=>{
@@ -26,11 +33,21 @@ export class MiperfilPage implements OnInit {
 
   		this.profesiones= data
 
+      this.teta =this.profesiones[1]
+
 
   	})
 
 
-  	this.appservice.miperfil(this.device.uuid).subscribe(data=>{
+    this.device.uuid
+
+
+  	this.appservice.miperfil('b76ef1c621142662').subscribe(data=>{
+
+
+      console.log(data[0])
+
+       this.miperfil=data[0]
 
 
   	})

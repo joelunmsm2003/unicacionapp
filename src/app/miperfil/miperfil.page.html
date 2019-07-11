@@ -14,16 +14,50 @@
 
 <ion-content padding>
 
+  <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="miperfil.nombre" type="text"  required></ion-input>
+    </ion-item>
 
+
+   <ion-item>
+      <ion-label position="floating">Edad</ion-label>
+      <ion-input [(ngModel)]="miperfil.edad" type="number"  required></ion-input>
+    </ion-item>
 	 
+<ion-item>
+          <ion-label position="floating">Sexo</ion-label>
+          <ion-select [(ngModel)]="miperfil._sexo" value="{{miperfil.sexo}}"  ok-text="Asignar" cancel-text="Cerrar">
+            <ion-select-option  *ngFor="let key of sexos" value='{{key.id}}' >{{key.nombre}}</ion-select-option >
+          </ion-select>
+        </ion-item>
+
 
 
 <ion-item>
-			    <ion-label position="floating">Mi profesion</ion-label>
-			    <ion-select [(ngModel)]="miperfil.profesion" >
-			      <ion-select-option  *ngFor="let key of profesiones" value='{{key.id}}' >{{key.nombre}}</ion-select-option >
-			    </ion-select>
-			  </ion-item>
+      <ion-label position="floating">Telefono</ion-label>
+      <ion-input [(ngModel)]="miperfil.telefono" type="number"  required></ion-input>
+    </ion-item>
+  
+
+
+
+
+  <ion-item>
+  <ion-label position="floating">Ocupacion</ion-label>
+  <ion-select   value="{{miperfil.ocupacion}}"  ok-text="Asignar" cancel-text="Cerrar">
+    <ion-select-option  *ngFor="let key of profesiones"  value="{{key.id}}">{{key.nombre}}</ion-select-option>
+
+  </ion-select>
+</ion-item>
+
+
+
+        <h4 padding>Describa el servicio</h4>
+
+        <ion-item>
+  <ion-textarea [(ngModel)]="miperfil.descripcion" ></ion-textarea>
+</ion-item>
   
 
 
